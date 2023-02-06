@@ -12,7 +12,13 @@ const Settings = () => {
 
   return (
     <View>
-      <Text>Ustawienia</Text>
+      <Text>Username</Text>
+      <Text>Level: </Text>
+      <Text>Fullname</Text>
+      <Text>Mail</Text>
+      <Text>Dark mode</Text>
+      <Text>Change password</Text>
+      <Text>Reset account</Text>
     </View>
   );
 };

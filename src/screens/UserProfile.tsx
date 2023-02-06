@@ -6,13 +6,19 @@ import {Text} from 'native-base';
 const UserProfile = () => {
   const appContext = useContext(AppContext);
 
+  const USERNAME = 'TestUser'
+
   useEffect(() => {
     console.log('contextObj', appContext);
   });
 
   return (
     <View>
-      <Text>Profil</Text>
+      {/* USER PROFILE IMAGE */}
+      <Text>Profil: {USERNAME}</Text>
+      {/* PERSONALIZE BUTTON */}
+      {/* USER LEVEL */}
+      {/* archievements */}
     </View>
   );
 };

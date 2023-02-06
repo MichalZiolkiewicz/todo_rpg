@@ -13,6 +13,10 @@ const Login = () => {
   return (
     <View>
       <Text>Zaloguj się</Text>
+      {/* USERNAME */}
+      <Input/>
+      {/* PASSWORD */}
+      <Input/>
     </View>
   );
 };

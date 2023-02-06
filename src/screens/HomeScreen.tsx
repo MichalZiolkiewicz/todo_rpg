@@ -14,6 +14,7 @@ const HomeScreen = () => {
   return (
     <View>
       <AddNewTask />
+      {/* TASK LIST */}
     </View>
   );
 };
