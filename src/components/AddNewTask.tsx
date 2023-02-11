@@ -1,10 +1,31 @@
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'native-base';
+import firestore from '@react-native-firebase/firestore';
+
 
 const AddNewTask = () => {
+
+  const getCollection = async () => {
+
+    const usersCollection = firestore()
+        .collection('UserTasks')
+        .get()
+        .then(collectionSnapshot => {
+          console.log('Total users: ', collectionSnapshot.size);
+          console.log('Array', collectionSnapshot)
+          collectionSnapshot
+              .forEach(documentSnapshot => {
+                console.log('User ID: ', documentSnapshot.id,
+                    documentSnapshot.data());
+              });
+        });
+
+    console.log('Loading data from firestore', usersCollection)
+  }
+
   return (
     <View style={styles.wrapper}>
-      <Button>Dodaj nowe zadanie +</Button>
+      <Button onPress={() => getCollection()}>Dodaj nowe zadanie +</Button>
     </View>
   );
 };

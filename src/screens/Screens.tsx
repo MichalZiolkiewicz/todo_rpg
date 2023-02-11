@@ -8,7 +8,7 @@ const Drawer = createDrawerNavigator();
 export const Screens = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Start" component={HomeScreen} />
+      <Drawer.Screen name="Twoje zadanie" component={HomeScreen} />
       <Drawer.Screen name="Profil" component={UserProfile} />
       <Drawer.Screen name="Ustawienia" component={Settings} />
     </Drawer.Navigator>
