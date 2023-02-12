@@ -1,22 +1,18 @@
 import {View} from 'react-native';
-import {useContext, useEffect} from 'react';
-import {AppContext} from '../context/AppContext';
-import {Text} from 'native-base';
+import {Button, Text} from 'native-base';
+import {useContext} from 'react';
+import {AuthContext} from '../context/AuthContext';
 
 const Login = () => {
-  const appContext = useContext(AppContext);
-
-  useEffect(() => {
-    console.log('contextObj', appContext);
-  });
+  const authContext = useContext(AuthContext);
+  const {handleLoginUser} = authContext;
 
   return (
     <View>
       <Text>Zaloguj się</Text>
-      {/* USERNAME */}
-      <Input/>
-      {/* PASSWORD */}
-      <Input/>
+      <Button onPress={() => handleLoginUser && handleLoginUser()}>
+        Zaloguj
+      </Button>
     </View>
   );
 };

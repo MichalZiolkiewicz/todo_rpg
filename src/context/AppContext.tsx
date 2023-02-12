@@ -1,20 +1,17 @@
 import React, {createContext, useState} from 'react';
+import {AppContextI} from '../interfaces';
 
-interface ContextInterface {
-  test: number;
-  handleTest: () => void;
-}
+const defaultValue = {
+  test: '',
+};
 
-const AppContext = createContext<ContextInterface | null>(null);
+const AppContext = createContext<AppContextI>(defaultValue);
 
 const AppProvider = (props: any) => {
-  const [test, setTest] = useState(0);
-
-  const handleTest = () => setTest(prevState => prevState + 1);
+  const [test, setTest] = useState('');
 
   const storeObject = {
     test,
-    handleTest,
   };
 
   return (

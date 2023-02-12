@@ -6,16 +6,19 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {Screens} from './src/screens/Screens';
 import {AppProvider} from './src/context/AppContext';
+import {AuthProvider} from './src/context/AuthContext';
 
 function App(): JSX.Element {
   return (
-    <AppProvider>
-      <NativeBaseProvider>
-        <NavigationContainer>
-          <Screens />
-        </NavigationContainer>
-      </NativeBaseProvider>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <NativeBaseProvider>
+          <NavigationContainer>
+            <Screens />
+          </NavigationContainer>
+        </NativeBaseProvider>
+      </AppProvider>
+    </AuthProvider>
   );
 }
 

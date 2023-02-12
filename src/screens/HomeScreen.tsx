@@ -1,20 +1,27 @@
 import {View} from 'react-native';
-import {useContext, useEffect} from 'react';
-import {AppContext} from '../context/AppContext';
-import {Text} from 'native-base';
+import {useContext} from 'react';
+import {Button} from 'native-base';
+
 import AddNewTask from '../components/AddNewTask';
+import {AuthContext} from '../context/AuthContext';
 
 const HomeScreen = () => {
-  const appContext = useContext(AppContext);
-
-  useEffect(() => {
-    console.log('contextObj', appContext);
-  });
+  const authContext = useContext(AuthContext);
+  const {handleLoginUser, loggedUser, logout} = authContext;
 
   return (
     <View>
       <AddNewTask />
-      {/* TASK LIST */}
+      <Button onPress={() => handleLoginUser && handleLoginUser()}>
+        Login test user
+      </Button>
+      <Button onPress={() => console.log(loggedUser)}>Show logged user</Button>
+      <Button
+        onPress={() => {
+          if (logout) logout();
+        }}>
+        Logout
+      </Button>
     </View>
   );
 };
