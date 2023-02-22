@@ -1,5 +1,7 @@
 import React, {createContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {AuthContextI} from '../interfaces';
 
 const defaultValue = {
@@ -11,13 +13,28 @@ const AuthContext = createContext<AuthContextI>(defaultValue);
 const AuthProvider = (props: any) => {
   const [loggedUser, setLoggedUser] = useState('');
 
+  const storeData = async (value: string) => {
+    try {
+      await AsyncStorage.setItem('@isUserLogged', value)
+    } catch (e) {
+    }
+  }
+
+  const readUserKey = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@isUserLogged')
+      if(value !== null) {
+        setLoggedUser(value)
+      }
+    } catch(e) {
+    }
+  }
+
   const handleLoginUser = (data: {email: string; password: string}) => {
     console.log('Trying to login user');
-
     auth()
       .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
-        console.log('User signed in!');
         setLogged();
       })
       .catch(error => {
@@ -39,6 +56,7 @@ const AuthProvider = (props: any) => {
       .then(() => {
         console.log('User signed out!');
         setLoggedUser('');
+        storeData('')
       });
   };
 
@@ -48,6 +66,7 @@ const AuthProvider = (props: any) => {
 
     if (user) {
       setLoggedUser(user);
+      storeData(user)
       console.log(user);
     } else {
       setLoggedUser('');
@@ -60,6 +79,7 @@ const AuthProvider = (props: any) => {
     logout,
     setLogged,
     handleLoginUser,
+    readUserKey
   };
 
   return (
