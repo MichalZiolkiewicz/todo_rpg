@@ -1,31 +1,20 @@
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'native-base';
-import firestore from '@react-native-firebase/firestore';
-
+import {useContext} from 'react';
+import {AppContext} from '../context/AppContext';
 
 const AddNewTask = () => {
-
-  const getCollection = async () => {
-
-    const usersCollection = firestore()
-        .collection('UserTasks')
-        .get()
-        .then(collectionSnapshot => {
-          console.log('Total users: ', collectionSnapshot.size);
-          console.log('Array', collectionSnapshot)
-          collectionSnapshot
-              .forEach(documentSnapshot => {
-                console.log('User ID: ', documentSnapshot.id,
-                    documentSnapshot.data());
-              });
-        });
-
-    console.log('Loading data from firestore', usersCollection)
-  }
-
+  const appContext = useContext(AppContext);
+  const {updateTaskList, getAll, initList, updateUserData, removeItem} =
+    appContext;
+  //
   return (
     <View style={styles.wrapper}>
-      <Button onPress={() => getCollection()}>Dodaj nowe zadanie +</Button>
+      <Button onPress={() => updateTaskList()}>Dodaj nowe zadanie +</Button>
+      <Button onPress={() => getAll()}>Wczytaj wszystkie</Button>
+      <Button onPress={() => initList()}>Inicjalizuj usera</Button>
+      <Button onPress={() => updateUserData()}>Aktualizuj</Button>
+      <Button onPress={() => removeItem()}>Usuń element</Button>
     </View>
   );
 };

@@ -10,8 +10,19 @@ const Login = () => {
   return (
     <View>
       <Text>Zaloguj się</Text>
-      <Button onPress={() => handleLoginUser && handleLoginUser()}>
-        Zaloguj
+      <Button
+        onPress={() =>
+          handleLoginUser &&
+          handleLoginUser({email: 'test@test.pl', password: 'Aa1234567'})
+        }>
+        test@test.pl
+      </Button>
+      <Button
+        onPress={() =>
+          handleLoginUser &&
+          handleLoginUser({email: 'a@a.pl', password: 'Aa1234567'})
+        }>
+        a@a.pl
       </Button>
     </View>
   );

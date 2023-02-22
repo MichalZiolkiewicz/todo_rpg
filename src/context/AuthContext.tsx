@@ -11,11 +11,11 @@ const AuthContext = createContext<AuthContextI>(defaultValue);
 const AuthProvider = (props: any) => {
   const [loggedUser, setLoggedUser] = useState('');
 
-  const handleLoginUser = () => {
+  const handleLoginUser = (data: {email: string; password: string}) => {
     console.log('Trying to login user');
 
     auth()
-      .signInWithEmailAndPassword('test@test.pl', 'Aa1234567')
+      .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
         console.log('User signed in!');
         setLogged();

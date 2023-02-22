@@ -1,10 +1,15 @@
 export interface AuthContextI {
-  handleLoginUser?: () => void;
+  handleLoginUser?: (data: {email: string; password: string}) => void;
   loggedUser: string;
   setLogged?: () => void;
   logout?: () => void;
 }
 
 export interface AppContextI {
-  test: string;
+  getAll: () => void;
+  addNew: () => void;
+  initList: () => void;
+  updateUserData: () => void;
+  updateTaskList: () => void;
+  removeItem: () => void;
 }
