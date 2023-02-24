@@ -11,14 +11,13 @@ import {AuthProvider} from './src/context/AuthContext';
 function App(): JSX.Element {
   const theme = extendTheme({
     colors: {
-      ultraViolet: '#4E5283',
-      fulvous: '#E98A15',
+      ultraViolet: {
+        600: '#4E5283',
+      },
     },
-    components: {
-      Button: {
-        baseStyle: {
-          color: 'pink',
-        },
+    myColorScheme: {
+      ultraViolet: {
+        600: '#4E5283',
       },
     },
   });

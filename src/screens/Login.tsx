@@ -1,18 +1,25 @@
 import {View, StyleSheet} from 'react-native';
-import {
-  Box,
-  Button,
-  Input,
-  Text,
-  FormControl,
-  WarningOutlineIcon,
-} from 'native-base';
+import {Box, Button, Input, FormControl, WarningOutlineIcon} from 'native-base';
 import {useContext, useEffect} from 'react';
 import {AuthContext} from '../context/AuthContext';
+import {useFormik} from 'formik';
 
-const Login = () => {
+const Login = ({navigation}: {navigation: any}) => {
   const authContext = useContext(AuthContext);
   const {handleLoginUser, readUserKey} = authContext;
+
+  const formik = useFormik({
+    initialValues: {
+      email: 'a@a.pl',
+      password: 'Aa1234567',
+    },
+    onSubmit: values => {
+      const {password, email} = values;
+
+      console.log('values', values);
+      handleLoginUser && handleLoginUser({email: email, password: password});
+    },
+  });
 
   useEffect(() => {
     if (readUserKey) {
@@ -22,14 +29,23 @@ const Login = () => {
 
   return (
     <View style={styles.wrapper}>
-      <Text>Zaloguj się</Text>
       <View>
         <Box>
           <FormControl isInvalid={false} mb={5}>
             <FormControl.Label>E-mail</FormControl.Label>
-            <Input placeholder="Wprowadź email" />
+            <Input
+              id="email"
+              placeholder="Wprowadź email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+            />
             <FormControl.Label>Hasło</FormControl.Label>
-            <Input placeholder="Wprowadź hasło" />
+            <Input
+              id="password"
+              placeholder="Wprowadź hasło"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+            />
             <FormControl.ErrorMessage
               leftIcon={<WarningOutlineIcon size="xs" />}>
               Błędny email lub hasło
@@ -38,21 +54,14 @@ const Login = () => {
         </Box>
       </View>
       <View style={styles.buttonWrapper}>
-        <Button
-          backgroundColor="#4E5283"
-          onPress={() =>
-            handleLoginUser &&
-            handleLoginUser({email: 'test@test.pl', password: 'Aa1234567'})
-          }>
+        <Button backgroundColor="#4E5283" onPress={() => formik.handleSubmit()}>
           Zaloguj się
         </Button>
         <Button
           variant="outline"
+          colorScheme="ultraViolet"
           style={{borderWidth: 2, borderColor: '#4E5283', borderRadius: 10}}
-          onPress={() =>
-            handleLoginUser &&
-            handleLoginUser({email: 'a@a.pl', password: 'Aa1234567'})
-          }>
+          onPress={() => navigation.navigate('register')}>
           Zarejestruj się
         </Button>
       </View>
