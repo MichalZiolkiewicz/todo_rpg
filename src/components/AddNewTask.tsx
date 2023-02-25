@@ -2,12 +2,16 @@ import {StyleSheet, View} from 'react-native';
 import {Button} from 'native-base';
 import {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
+import {AuthContext} from '../context/AuthContext';
 
 const AddNewTask = () => {
   const appContext = useContext(AppContext);
   const {updateTaskList, getAll, initList, updateUserData, removeItem} =
     appContext;
-  //
+
+  const authContext = useContext(AuthContext);
+  const {logout} = authContext;
+
   return (
     <View style={styles.wrapper}>
       <Button onPress={() => updateTaskList()}>Dodaj nowe zadanie +</Button>
@@ -15,6 +19,7 @@ const AddNewTask = () => {
       <Button onPress={() => initList()}>Inicjalizuj usera</Button>
       <Button onPress={() => updateUserData()}>Aktualizuj</Button>
       <Button onPress={() => removeItem()}>Usuń element</Button>
+      <Button onPress={() => logout()}>Wyloguj</Button>
     </View>
   );
 };

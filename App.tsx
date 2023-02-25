@@ -24,13 +24,13 @@ function App(): JSX.Element {
 
   return (
     <AuthProvider>
-      <AppProvider>
-        <NativeBaseProvider theme={theme}>
-          <NavigationContainer>
+      <NativeBaseProvider theme={theme}>
+        <NavigationContainer>
+          <AppProvider>
             <Screens />
-          </NavigationContainer>
-        </NativeBaseProvider>
-      </AppProvider>
+          </AppProvider>
+        </NavigationContainer>
+      </NativeBaseProvider>
     </AuthProvider>
   );
 }

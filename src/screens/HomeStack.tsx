@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from './Login';
+import Login from './Auth/Login';
 import Register from './Auth/Register';
 
 export const HomeStack = () => {

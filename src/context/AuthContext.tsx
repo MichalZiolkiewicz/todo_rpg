@@ -6,6 +6,7 @@ import {AuthContextI} from '../interfaces';
 
 const defaultValue = {
   loggedUser: '',
+  logout: function () {},
 };
 
 const AuthContext = createContext<AuthContextI>(defaultValue);
@@ -15,20 +16,18 @@ const AuthProvider = (props: any) => {
 
   const storeData = async (value: string) => {
     try {
-      await AsyncStorage.setItem('@isUserLogged', value)
-    } catch (e) {
-    }
-  }
+      await AsyncStorage.setItem('@isUserLogged', value);
+    } catch (e) {}
+  };
 
   const readUserKey = async () => {
     try {
-      const value = await AsyncStorage.getItem('@isUserLogged')
-      if(value !== null) {
-        setLoggedUser(value)
+      const value = await AsyncStorage.getItem('@isUserLogged');
+      if (value !== null) {
+        setLoggedUser(value);
       }
-    } catch(e) {
-    }
-  }
+    } catch (e) {}
+  };
 
   const handleLoginUser = (data: {email: string; password: string}) => {
     console.log('Trying to login user');
@@ -56,7 +55,7 @@ const AuthProvider = (props: any) => {
       .then(() => {
         console.log('User signed out!');
         setLoggedUser('');
-        storeData('')
+        storeData('');
       });
   };
 
@@ -66,7 +65,7 @@ const AuthProvider = (props: any) => {
 
     if (user) {
       setLoggedUser(user);
-      storeData(user)
+      storeData(user);
       console.log(user);
     } else {
       setLoggedUser('');
@@ -79,7 +78,7 @@ const AuthProvider = (props: any) => {
     logout,
     setLogged,
     handleLoginUser,
-    readUserKey
+    readUserKey,
   };
 
   return (
