@@ -2,6 +2,7 @@ import React, {createContext, useContext} from 'react';
 import {AppContextI} from '../interfaces';
 import {AuthContext} from './AuthContext';
 import firestore, {firebase} from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/native';
 
 const defaultValue = {
   addNew: function () {},
@@ -18,6 +19,8 @@ const AppProvider = (props: any) => {
   const authContext = useContext(AuthContext);
   const {loggedUser} = authContext;
 
+  const navigation = useNavigation();
+
   const collection = firestore().collection('Users');
 
   // TODO FIX months 2 => 02
@@ -32,6 +35,8 @@ const AppProvider = (props: any) => {
       .set({userId: loggedUser, userList: [], createdAt: today})
       .then(() => {
         console.log('Success');
+        // @ts-ignore
+        navigation.navigate('Profil');
       })
       .catch(e => {
         console.log(e);
@@ -40,7 +45,12 @@ const AppProvider = (props: any) => {
 
   const getAll = async () => {
     await collection.doc(loggedUser).onSnapshot(documentSnapshot => {
-      console.log('User data: ', documentSnapshot.data());
+      const userData = documentSnapshot.data();
+      if (userData) {
+        console.log('User found: ', documentSnapshot.data());
+      } else {
+        initList();
+      }
     });
   };
 

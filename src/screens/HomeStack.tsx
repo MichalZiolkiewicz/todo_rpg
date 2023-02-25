@@ -1,5 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from './Login';
+import Login from './Auth/Login';
+import Register from './Auth/Register';
 
 export const HomeStack = () => {
   const Stack = createNativeStackNavigator();
@@ -10,6 +11,11 @@ export const HomeStack = () => {
         options={{headerShown: false}}
         name="login"
         component={Login}
+      />
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="register"
+        component={Register}
       />
     </Stack.Navigator>
   );
